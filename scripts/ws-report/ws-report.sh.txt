@@ -1,0 +1,206 @@
+#!/bin/sh
+# Aravind Datta, 3/17/2017
+
+
+# define variables
+CLIENT=VGI
+BIZ=`echo $1 | awk '{print toupper($0)}'`
+SCRIPTS_DIR=~/scripts
+EMAIL_FROM="sv_dg_sla_reporting@scivantage.com"
+EMAIL_TO="sv_dg_sla_reporting@scivantage.com,michael.pass@scivantage.com,aravind.datta@scivantage.com"
+HOSTNAME=`uname -n | cut -d'.' -f1`
+
+
+# validate required input - business line - VBS or MF
+if [[ -z $BIZ ]]; then
+   echo "Usage: Enter either VBS or MF at minimum"
+   echo "       In addition, you can also enter a month[1..12] you want to generate report for"
+   echo "       and/or email options [y/n]"
+   exit 1;
+else
+   if [[ "$BIZ" == "VBS" ]]; then
+      cd ~/vgi_prod_server/logs
+   else
+      if [[ "$BIZ" == "MF" ]]; then
+         cd ~/vgi_prod_mf_server/logs
+      else
+         echo "Usage:   Enter either VBS or MF at minimum"
+         echo " In addition, you can also enter a month[1..12] you want to generate report for"
+         echo " and/or email options [y/n]"
+         exit 1;
+      fi
+   fi
+fi
+
+
+# validate rest of the input
+two="true"
+if [[ -z $2 ]]; then
+   #echo "didn't enter 2nd.. "
+   two="false"
+fi
+# if it didn't go in, it means they entered 2nd..
+#echo "2nd.."$two
+
+
+# if user enters 2nd parameter
+if [[ $two == "true" ]]; then
+   third="true"
+   # now check if they entered 3rd as well..
+   #echo "coming in to check 3rd.."
+   if [[ -z $3 ]]; then
+      #echo "didn't enter 3rd; user entered only 2.. so, check and assign.."
+      third="false"
+      #if 2nd is a number, then, last_month; else, if it is y/n then, email
+      if [[ $2 =~ ^-?[0-9]+$ ]]; then
+         LAST_MONTH=$2
+         EMAIL="Y"
+      else
+         EMAIL=`echo $2 | awk '{print toupper($0)}'`
+      fi
+      #echo "last month: "$LAST_MONTH
+      #echo "email: "$EMAIL
+   else
+      #echo "user entered 3rd as well.."
+      LAST_MONTH=$2
+      EMAIL=$3
+   fi
+else
+   LAST_MONTH=''
+   EMAIL="Y"
+fi
+
+
+#echo "last month.. "$LAST_MONTH
+#echo "email.. "$EMAIL
+
+
+# validate "last month"; LM_STR variable is used to display month name;
+# for ex: Mar instead of 03. when a user inputs numeric month value, then month
+# name is calculated based on the numeric value. an array of months is used for
+# that purpose. as arrays start with 0 and there is no month associated with
+# number 0, a dummy value is set to position 0. then, jan takes 1; feb takes 2
+# and so on. user can never enter 0 'cus user input range is between 1 & 12
+if [[ -z $LAST_MONTH ]]; then
+   LAST_MONTH=`date +'%m' -d 'last month'`
+   LM_STR=`date +'%b' -d 'last month'`
+else if ! [[ "$LAST_MONTH" =~ ^[0-9]+$ ]] || [[ "$LAST_MONTH" -lt 1 ]] || [[ "$LAST_MONTH" -gt 12 ]]; then
+        echo "enter a value between 1 and 12"
+        exit 1;
+     else
+        MONTHS=(Dum Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec)
+        if [[ $LAST_MONTH -lt 10 ]]; then
+           LAST_MONTH="0$LAST_MONTH"
+        fi
+        LM_STR=${MONTHS[$2]}
+     fi
+fi
+
+
+# set year
+CURR_YR=`date +'%Y'`
+PREV_YR=`date +'%Y' -d 'last year'`
+YEAR=$CURR_YR
+
+
+# reset year to last yr if lastmonth=dec
+if [ $LAST_MONTH -eq 12 ]; then
+   YEAR=$PREV_YR
+fi
+
+
+# define log file and make sure logs exist for the month/year
+LOG_FILE=catalina.log.$YEAR-$LAST_MONTH-*
+COUNT=$(ls $LOG_FILE | wc -l)
+if [[ $COUNT -eq 0 ]]; then
+   echo "logs don't exist..."
+   exit 1;
+fi
+
+
+# log work
+echo "This $CLIENT "$BIZ" WS performance statistics report will be generated for: "$LM_STR $YEAR
+
+
+# cleanup previous reports
+REPORT_TXT=report_$HOSTNAME-$BIZ-$LAST_MONTH-$YEAR.txt
+REPORT_DETAILS=report-details_$HOSTNAME-$BIZ-$LAST_MONTH-$YEAR.txt
+rm -rf $SCRIPTS_DIR/$REPORT_DETAILS
+rm -rf $SCRIPTS_DIR/$REPORT_TXT
+
+
+# loop thru all logs for the month
+for i in $( ls $LOG_FILE ); do
+   echo "working on: " $i
+   DATE=`echo $i | cut -d'.' -f3 | awk '{print $1}'`
+   if [[ $i == *.gz ]]; then
+      zgrep "Exiting Taxlots" $i > all.txt
+   else
+      grep "Exiting Taxlots" $i > all.txt
+   fi
+
+   # get all WS requests for the day
+   ALL_REQ=`wc -l all.txt | awk '{ print $1 }'`
+
+   # get "summary" requests from all WS requests
+   grep Summary all.txt > summary.txt
+   ALL_SUMM=`wc -l summary.txt | awk '{ print $1 }'`
+
+   # get "summary responses that took more than a second"
+   SUMM_GT_1SEC=`grep "Elapsed time: [0-9]\{4,\} ms" summary.txt | wc -l`
+
+   # calculate percentage of summary responses that took more than a second
+   SUMM_PCT=$(awk "BEGIN { pc=100*${SUMM_GT_1SEC}/${ALL_SUMM}; i=int(pc); print (pc) }")
+
+   # round off percentage to 2 digits after the decimal
+   SUMM_PCTR=`printf "%.2f" "$SUMM_PCT"`
+
+   # write the day's report to a file
+   echo "All WS requests on "$DATE": "$ALL_REQ", all summary requests: "$ALL_SUMM", all summary requests >1sec: "$SUMM_GT_1SEC", percentage: "$SUMM_PCTR"%" >> $SCRIPTS_DIR/$REPORT_DETAILS
+   #break;
+done
+
+cd $SCRIPTS_DIR
+
+
+# define # of days in the month to calculate averages
+NO_OF_DAYS=`wc -l $REPORT_DETAILS | awk '{print $1}'`
+
+
+# calculate WS response averages for the month
+TOTAL_WS=`cut -d' ' -f6 $REPORT_DETAILS | cut -d ',' -f1 | awk '{ SUM += $1} END { print SUM }'`
+AVG_WS=$(awk "BEGIN { avg=${TOTAL_WS}/${NO_OF_DAYS}; i=int(avg); print (avg) }")
+
+TOTAL_SUMM=`cut -d' ' -f10 $REPORT_DETAILS | cut -d ',' -f1 | awk '{ SUM += $1} END { print SUM }'`
+AVG_SUMM=$(awk "BEGIN { avg=${TOTAL_SUMM}/${NO_OF_DAYS}; i=int(avg); print (avg) }")
+
+TOTAL_SLOW=`cut -d' ' -f15 $REPORT_DETAILS | cut -d ',' -f1 | awk '{ SUM += $1} END { print SUM }'`
+AVG_SLOW=$(awk "BEGIN { avg=${TOTAL_SLOW}/${NO_OF_DAYS}; i=int(avg); print (avg) }")
+
+TOTAL_SLOWPCT=`cut -d' ' -f17 $REPORT_DETAILS | cut -d '%' -f1 | awk '{ SUM += $1} END { print SUM }'`
+AVG_SLOWPCT=$(awk "BEGIN { avg=${TOTAL_SLOWPCT}/${NO_OF_DAYS}; i=int(avg); print (avg) }")
+AVG_SLOWPCTR=`printf "%.2f" "$AVG_SLOWPCT"`
+
+
+# write report to file (added extra spaces EOL intentionally; do not delete)
+echo "$CLIENT "$BIZ" Webservice performance statistics report from "$HOSTNAME":    " >> $REPORT_TXT
+echo "           " >> $REPORT_TXT
+echo "Daily average of all webservice requests: "$AVG_WS"    " >> $REPORT_TXT
+echo "Daily average of all summary requests: "$AVG_SUMM"    " >> $REPORT_TXT
+echo "Daily average of all summary responses that took over a second: "$AVG_SLOW"    " >> $REPORT_TXT
+echo "Daily average percentage of summary responses that took over a second: "$AVG_SLOWPCTR"%    " >> $REPORT_TXT
+
+
+# email simple report for this server/instance ONLY
+if [[ "$EMAIL" == "Y" ]]; then
+   cat $REPORT_TXT | nail -r $EMAIL_FROM -a $REPORT_DETAILS -s "MONTHLY $CLIENT "$BIZ" Webservice Performance Statistics Report for $LM_STR $YEAR" $EMAIL_TO
+fi
+
+
+# email aggregate report
+if [[ $HOSTNAME == "vgprod1-ws4"  ]]; then
+   ./ws-perf-report-aggregator.sh $REPORT_TXT $LM_STR $EMAIL_FROM $EMAIL_TO
+fi
+
+
+# end of report
