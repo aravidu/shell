@@ -79,71 +79,71 @@ sqlplus -s $DB_USER/$DB_PASS@$ORACLE_SID<<!
    set linesize 700
 
    spool $1-$2-am.txt
-   SELECT ACCT_ID||'|'||ACCT_NO||'|'||INVESTOR_ID||'|'||ACCT_TYPE_ID||'|'||ACCT_NAME||'|'||BROKER_ID||'|'||BRANCH_CD||'|'||CREATEDBY||'|'||CREATEDDATE||'|'||MODIFIEDBY||'|'||MODIFIEDDATE||'|'||DELETEFLAG||'|'||VERSIONNUM||'|'||WASH_SALE_FLAG||'|'||TAX_FLAG||'|'||SUB_NO||'|'||FIRM_NO||'|'||REP||'|'||BO_ID||'|'||TAX_BRACKET||'|'||ST_PRIOR_YEAR_LOSS||'|'||LT_PRIOR_YEAR_LOSS||'|'||IS_ROLL||'|'||TAX_TYPE||'|'||MANAGED_ACCT_IND||'|'||ACTIVE_FLAG||'|'||IRA_IND||'|'||TAX_LOT_METHOD||'|'||STATEMENT_IND||'|'||REINVEST_ROLLUP||'|'||PRCSS_13_MNTH_IND||'|'||LE_ENABLED||'|'||TRAILER1||'|'||'|'||TAXROLLBACK||'|' from account_master where acct_no='$1';
+   SELECT COL1||'|'||COL2||'|'||COL3||'|' from tab1 where col2='$1';
    spool off
 
    spool $1-$2-seed.txt
-   SELECT IFCE_SEED_ID||'|'||SVI_RECCODE||'|'||SVI_DATADATE||'|'||BO_ID||'|'||CLIENT_ID||'|'||BRANCH_CD||'|'||SVI_SOURCE_CD||'|'||FIRM_NO||'|'||SUB_NO||'|'||ACCT_NO||'|'||ACCT_TYPE||'|'||CUSIP||'|'||FACTOR||'|'||QUANTITY||'|'||REP||'|'||SEC_NO||'|'||SEC_TYPE||'|'||SETTLE_CYMD||'|'||SETTLE_QTY||'|'||SYMBOL||'|'||PROCESS_STATUS||'|'||ERROR_CODE||'|'||CREATEDBY||'|'||CREATEDDATE||'|'||MODIFIEDBY||'|'||MODIFIEDDATE||'|'||DELETEFLAG||'|'||VERSIONNUM||'|'||IFCE_ID||'|'||BIG_PRX||'|'||NET_AMT||'|'||HOLDING_DATE||'|'||LONG_SHORT_POS||'|'||DESC1||'|'||DESC2||'|'||DESC3||'|'||TXN_DATE||'|'||DBASIS||'|'||ACATTYPE||'|'||ODATE||'|'||STRIKE_PRX||'|'||EXPIRE_CYMD||'|'||UNDERLYING_SEC||'|'||PUT_CALL_IND||'|'||SUB_TYPE||'|'||ROOT_SYMBOL||'|'||MKT_SYMBOL||'|'||TRADE_NO||'|'||CURRENCY||'|'||IMPORT_TYPE||'|'||CUC_FLAG||'|'||DRP_FLAG||'|'||SUBLOT_IND||'|'||LOT_TXN_ID||'|'||PRN_FACTOR||'|'||EXCHANGE_RATE||'|'||FOREIGN_NET_AMT||'|'||SEDOL||'|'||ISIN_COUNTRY_CODE||'|'||ISIN_ID||'|'||ISIN_CHK_DIGIT||'|'||OPEN_SETTLE_CYMD||'|'||PURCHASE_AWAY||'|'||COUPON_RATE||'|'||ORIGINAL_COST||'|' from svi_seed where acct_no='$1' and sec_no='$2';
+   # *** protected query *** 
    spool off
 
    spool $1-$2-trd.txt
-   SELECT IFCE_TXN_ID||'|'||SVI_RECCODE||'|'||SVI_DATADATE||'|'||BO_ID||'|'||CLIENT_ID||'|'||BRANCH_CD||'|'||SVI_SOURCE_CD||'|'||FIRM_NO||'|'||SUB_NO||'|'||ACCT_NO||'|'||ACCT_TYPE||'|'||REP||'|'||SEC_NO||'|'||CUSIP||'|'||SEC_TYPE||'|'||SYMBOL||'|'||TRADE_CYMD||'|'||ASOF_CYMD||'|'||SETTLE_CYMD||'|'||BIG_QTY||'|'||BIG_PRX||'|'||PURCH_OR_SALE||'|'||BIG_EXCH||'|'||NET_AMT||'|'||OFFSET_TYPE||'|'||FOREIGN_CURR||'|'||DESC1||'|'||DESC2||'|'||DESC3||'|'||DESC4||'|'||DESC5||'|'||DESC6||'|'||BOND_TYPE||'|'||COUPON_RATE||'|'||CONV_FACTOR||'|'||PRICE_FACTOR||'|'||BASIS_PRX||'|'||BASIS_YIELD||'|'||PRINCIPAL_AMT||'|'||INTEREST_AMT||'|'||SEC_FEE_AMT||'|'||COMM_AMT||'|'||GROSS_COMM||'|'||GROSS_PCNT_IND||'|'||CONCESSION_AMT||'|'||HANDLE_FEE_AMT||'|'||LOOKALIKE||'|'||EQUIV_DISCOUNT||'|'||DISCOUNT||'|'||TOTAL_ORD_QTY||'|'||TOTAL_ORD_COMM||'|'||POSTAGE_AMT||'|'||SEC_CLASS||'|'||CANCEL_IND||'|'||REBILL_IND||'|'||SPEC_TYPE_1||'|'||SPEC_TYPE_2||'|'||SPEC_TYPE_3||'|'||CONFIRM_NOTE||'|'||ORDER_SOURCE||'|'||OCC_IND||'|'||NET_FEE_AMT||'|'||TRD_TIMESTAMP||'|'||COUNTRY_CODE||'|'||OFF_COUNTRY_CODE||'|'||ADJUST_SW||'|'||REINVEST_SW||'|'||TAX_LOT||'|'||FX_IND||'|'||YIELD_TO_MATURITY||'|'||MATURITY_CYMD||'|'||TRADE_CYMD_CONV||'|'||ASOF_CYMD_CONV||'|'||SETTLE_CYMD_CONV||'|'||MATURITY_CYMD_CONV||'|'||BUY_SELL_IND||'|'||OPT_TYPE||'|'||PROCESS_STATUS||'|'||ERROR_CODE||'|'||CREATEDBY||'|'||CREATEDDATE||'|'||MODIFIEDBY||'|'||MODIFIEDDATE||'|'||DELETEFLAG||'|'||VERSIONNUM||'|'||IFCE_RAD_ID||'|'||IFCE_RCK_ID||'|'||LRM_ID||'|'||PREMIUM||'|'||WASH_AMT||'|'||TXN_EVENT_ID||'|'||BUY_SELL_IND_ORG||'|'||STRIKE_PRX||'|'||EXPIRE_CYMD||'|'||UNDERLYING_SEC||'|'||PUT_CALL_IND||'|'||SUB_TYPE||'|'||ROOT_SYMBOL||'|'||MKT_SYMBOL||'|'||TRADE_NO||'|'||CURRENCY||'|'||CUC_FLAG||'|'||DRP_FLAG||'|'||PRN_FACTOR||'|'||EXCHANGE_RATE||'|'||FOREIGN_NET_AMT||'|'||SEDOL||'|'||ISIN_COUNTRY_CODE||'|'||ISIN_ID||'|'||ISIN_CHK_DIGIT||'|'||VSP_DATES||'|'||IS_SETTLED_FLAG||'|'||SEC_FEE_AMT2||'|'||COMM_AMT2||'|'||BR_MISC1||'|'||BR_MISC2||'|'||BR_MISC3||'|'||EXCHOUT_IND||'|' from svi_trd where acct_no='$1' and sec_no='$2';
+   # *** protected query *** 
    spool off
 
    spool $1-$2-rad.txt
-   SELECT IFCE_TXN_ID||'|'||SVI_RECCODE||'|'||SVI_DATADATE||'|'||BO_ID||'|'||CLIENT_ID||'|'||BRANCH_CD||'|'||SVI_SOURCE_CD||'|'||FIRM_NO||'|'||SUB_NO||'|'||ACCT_NO||'|'||ACCT_TYPE||'|'||REP||'|'||SEC_NO||'|'||CUSIP||'|'||SEC_TYPE||'|'||SYMBOL||'|'||TRADE_CYMD||'|'||ASOF_CYMD||'|'||SETTLE_CYMD||'|'||BIG_QTY||'|'||BIG_PRX||'|'||PURCH_OR_SALE||'|'||BIG_EXCH||'|'||NET_AMT||'|'||OFFSET_TYPE||'|'||FOREIGN_CURR||'|'||DESC1||'|'||DESC2||'|'||DESC3||'|'||DESC4||'|'||DESC5||'|'||DESC6||'|'||BOND_TYPE||'|'||SEC_CLASS||'|'||COUNTRY_CODE||'|'||OFF_COUNTRY_CODE||'|'||ADJUST_SW||'|'||REINVEST_SW||'|'||SOURCE||'|'||REC_TYPE||'|'||TRADE_CYMD_CONV||'|'||ASOF_CYMD_CONV||'|'||SETTLE_CYMD_CONV||'|'||IN_OUT_IND||'|'||LONG_SHORT_IND||'|'||PROCESS_STATUS||'|'||ERROR_CODE||'|'||CREATEDBY||'|'||CREATEDDATE||'|'||MODIFIEDBY||'|'||MODIFIEDDATE||'|'||DELETEFLAG||'|'||VERSIONNUM||'|'||LRM_ID||'|'||IFCE_RAD_ID||'|'||HOLDING_DATE||'|'||LONG_SHORT_POS||'|'||PAIR_ID||'|'||RELATED_ACCT||'|'||TRAN_ID||'|'||DBASIS||'|'||ACATTYPE||'|'||ODATE||'|'||STRIKE_PRX||'|'||EXPIRE_CYMD||'|'||UNDERLYING_SEC||'|'||PUT_CALL_IND||'|'||SUB_TYPE||'|'||ROOT_SYMBOL||'|'||MKT_SYMBOL||'|'||TRADE_NO||'|'||CURRENCY||'|'||CUC_FLAG||'|'||DRP_FLAG||'|'||PRN_FACTOR||'|'||TRAN_CTN_NUM||'|'||ALT_TRAN_CTN_NUM||'|'||IN_OUT_FIRM_NUM||'|'||IN_OUT_FIRM_TYPE||'|'||IN_OUT_FIRM_ACCT_NO||'|'||ISIN_COUNTRY_CODE||'|'||ISIN_ID||'|'||ISIN_CHK_DIGIT||'|'||CERT_NUM_PFX||'|'||CERT_NUM||'|'||BASIS_SHP||'|'||TAX_RPT_ITA||'|'||EXCHANGE_RATE||'|'||TAXL_ORIG_COST||'|'||TAXL_CUR_COST||'|'||ZERO_BASIS_IND||'|'||LOT_HOLDING_DATE||'|'||SEDOL||'|'||CANCEL_IND||'|'||SETTLEMENT_FLAG||'|'||FOREIGN_NET_AMT||'|'||SEC_SUBTYPE||'|'||IMPORT_TYPE||'|'||TRANSFER_TYPE||'|'||EX_DATE||'|'||PAY_DATE||'|'||RECORD_DATE||'|'||DIV_RATE||'|'||OPT_DIV_RATE||'|'||CONTROL_ID||'|'||EFFECTIVE_DATE||'|'||ORIGINAL_CUSIP||'|'||STEPUP_PCT||'|'||ACAT_SEQ_NUM||'|'||EXCHANGE_RATE_FMV||'|'||XFER_QTY||'|'||XFER_CUSIP||'|'||MARKET_DISCOUNT||'|'||BOND_PREMIUM||'|'||ACQUISTION_PREMIUM||'|'||ACCRUED_OID||'|'||WASH_SALE_ADJ_AMT||'|'||ACC_MAR_DIS_ELEC||'|'||INCL_MAR_DIS_INC_ELE||'|'||INT_AS_OID_ELECTION||'|'||AMORT_PRE_ELEC||'|'||SPOTRATE_ELECTION||'|'||BR_MISC1||'|'||BR_MISC2||'|'||BR_MISC3||'|'||INTEREST_AMT||'|'||AVDATE||'|'||LAST_ADJ_DATE||'|'||CARRY_OFFSET||'|'||DIS_CARRY_OFFSET||'|'||PRIOR_YEAR_MARKTOMARKET||'|'||PURCHASE_AWAY||'|'||COUPON_RATE||'|'||CA_ID||'|' from svi_rad where acct_no='$1' and sec_no='$2';
+   # *** protected query *** 
    spool off
 
    spool $1-$2-cli.txt
-   SELECT IFCE_CLI_ID||'|'||TRADE_NO||'|'||BO_ID||'|'||FIRM_ID||'|'||SUB_NO||'|'||ACCT_NO||'|'||ACCT_TYPE||'|'||CUSIP||'|'||SEC_NO||'|'||SYMBOL||'|'||EXPIRE_CYMD||'|'||STRIKE_PRX||'|'||UNDERLYING_SEC||'|'||PUT_CALL_IND||'|'||SEC_TYPE||'|'||DESC1||'|'||DESC2||'|'||DESC3||'|'||QUANTITY||'|'||ACQUISITION_CYMD||'|'||ADJ_BASIS||'|'||WASH_AMT||'|'||LONG_SHORT_IND||'|'||TRAILER||'|'||DISPOSITION_CYMD||'|'||SVI_SOURCE_CD||'|'||PROCEEDS||'|'||BRANCH_CODE||'|'||LOT_HOLDING_DATE||'|'||LONG_TERM_GL||'|'||SHORT_TERM_GL||'|'||CLOSING_TXN_ID||'|'||PROCESS_STATUS||'|'||ERROR_CODE||'|'||CREATEDBY||'|'||CREATEDDATE||'|'||MODIFIEDBY||'|'||MODIFIEDDATE||'|'||DELETEFLAG||'|'||VERSIONNUM||'|'||CLIENT_ID||'|'||OPEN_SETTLEMENT_DATE||'|'||OPEN_PRICE||'|'||CLOSE_SETTLEMENT_DATE||'|'||CLOSE_PRICE||'|'||TAXABLE_FLAG||'|'||ROOT_SYMBOL||'|'||EXTERNAL_IND||'|'||CUC_FLAG||'|'||CLOSING_TRAILER||'|'||CURRENCY_RATE||'|'||LOSS_NOT_ALLOWED||'|'||GFT_INH_IND||'|'||GIFT_DT||'|'||FMV_AS_OF_DT||'|'||REPORTABLE_FLAG||'|'||RELATED_OPENLOT_FLAG||'|'||TRANSACTION_TYPE||'|'||IS_RR||'|'||OPEN_SUBLOT_IND||'|' from svi_cli where acct_no='$1' and sec_no='$2';
+   # *** protected query *** 
    spool off
 
    spool $1-$2-fim.txt
-   SELECT FIP_HPS_MASTER_ID||'|'||WSC_ID||'|'||ACCT_NO||'|'||SEC_NO||'|'||RECORD_TYPE||'|'||PROPRIETARY_SECURITY||'|'||SERVICE_INDICATOR||'|'||SECURITY_ISSUE_TYPE||'|'||INTEREST_TYPE||'|'||NQSI_INDICATOR||'|'||PUBLICATION_INDICATOR||'|'||AMT_INDICATOR||'|'||DAY_BASIS||'|'||DATA_STATUS_CODE||'|'||BOND_UNIT_FACTOR||'|'||FILE_RUN_DATE||'|'||TAX_CODE||'|'||TOTAL_OID||'|'||TOTAL_ACQ_PREM||'|'||TOTAL_BOND_PRE_PRO||'|'||TOTAL_MARKET_DISCOUNT||'|'||CREATED_BY||'|'||CREATED_DATE||'|'||MODIFIED_BY||'|'||MODIFIED_DATE||'|'||PROCESS_STATUS||'|'||ERROR_CODE||'|'||SENT_TO_PROVIDER||'|'||DELETEFLAG||'|'||CALL_DATE||'|'||TOTAL_PRNCPL_PAYMT||'|'||TOTAL_DFRD_INT_PAID||'|'||TAX_LOT_IDENTIFIER||'|'||MATURITY_DATE||'|'||OID_ACCRUAL_APPLIED||'|'||SL_ACQ_PREMIUM_APPLIED||'|'||SL_MARKET_DISCOUNT_APPLIED||'|'||BOND_PREMIUM_APPLIED||'|'||PRIN_PAYDOWN_APPLIED||'|'||DFRD_INT_PAID_APPLIED||'|'||TAX_YEAR||'|'||NQSI_PREMIUM_APPLIED||'|'||CUSIP||'|'||QUANTITY||'|'||CLOSE_SETTLECYMD||'|'||CLOSE_TRADECYMD||'|'||ISSUE_DT||'|'||ISSUE_PRICE||'|'||TOTAL_YB_MARKET_DISCOUNT||'|'||TOTAL_YB_ACQ_PREM||'|'||TOTAL_QSI||'|'||YB_ACQ_PREMIUM_APPLIED||'|'||YB_MARKET_DISCOUNT_APPLIED||'|'||TREAT_ALLQSI_APPLIED||'|'||TOTAL_REPORT_QSI||'|'||TOTAL_REPORT_BPR||'|'||BOND_PREM_APPLD_PER_YEAR||'|'||OID_APPLD_PER_YEAR||'|'||ACQ_APPLD_PER_YEAR||'|'||NQSI_APPLD_PER_YEAR||'|'||MDI_APPLD_PER_YEAR||'|'||TAOID_APPLD_PER_YEAR||'|'||LIFETODTAPPLIEYR||'|'||ACCT_ID||'|'||SECURITY_ID||'|'||TOTAL_PRO_INT_NQB||'|'||TOTAL_NQSI_PYMT||'|'||REC_TYPE||'|' FROM FIP_HPS_MASTER WHERE ACCT_NO='$1' and SEC_NO='$2';
+   # *** protected query *** 
    spool off
 
    spool $1-$2-fid.txt
-   SELECT WSC_ID||'|'||ACCT_NO||'|'||SEC_NO||'|'||RECORD_TYPE||'|'||LOT_NUMBER||'|'||CUSTOMIZED_STRIP_CALCULATION||'|'||BEGIN_DATE||'|'||PERIOD_TYPE||'|'||CALL_INDICATOR||'|'||DAILY_OID_ACCRUAL_RATE||'|'||ACCRUAL_DAYS||'|'||FACE_AMOUNT||'|'||PERIOD_OID_ACCRUAL||'|'||ADJUSTED_ISSUE_PRICE||'|'||ORIGINAL_COST_BASIS||'|'||PURCHASE_CONDITION||'|'||ACQ_PREM_AMOR_RATIO||'|'||PERIOD_FIXED_ACQ_PREM||'|'||DAILY_PREMIUM_AMOR_INT||'|'||PERIOD_BOND_PRE_PRO||'|'||DAILY_MKT_DISC_RATE||'|'||PERIOD_MARKET_DISCOUNT||'|'||ADJUSTED_COST_BASIS_CUR_MD||'|'||TOTAL_ACCRUED_MARKET_DISCOUNT||'|'||ADJUSTED_COST_BASIS_NO_DMD||'|'||END_DATE||'|'||ORIGINAL_PURCHASE_DATE||'|'||PURCHASE_AIP||'|'||CREATED_BY||'|'||CREATED_DATE||'|'||MODIFIED_BY||'|'||MODIFIED_DATE||'|'||PROCESS_STATUS||'|'||ERROR_CODE||'|'||SENT_TO_PROVIDER||'|'||DELETEFLAG||'|'||TAX_LOT_IDENTIFIER||'|'||LIFE_TO_DATE_NET_OID||'|'||YEAR_TO_DATE_NET_OID||'|'||YEAR_TO_DATE_BOND_PREM||'|'||YEAR_TO_DATE_MARKET_DISCOUNT||'|'||LIFE_TO_DATE_OID||'|'||LIFE_TO_DATE_BOND_PREM||'|'||YEAR_TO_DATE_OID||'|'||LIFE_TO_DATE_ACQ_PREM||'|'||YEAR_TO_DATE_ACQ_PREM||'|'||DEFERRED_INT_PAID||'|'||PURCH_TO_DATE_D_INT||'|'||PRINCIPAL_PMNT||'|'||ORIGINAL_COST||'|'||ORIGINAL_QTY||'|'||DAY_COUNT||'|'||OID_ACCRUAL_TILL_DATE||'|'||BOND_PREMIUM_DAILY_AMOUNT||'|'||BOND_PREMIUM_APPLIED||'|'||CLOSE_TRADECYMD||'|'||FIP_HPS_DETAIL_ID||'|'||PURCH_TO_DATE_PRNCP_PMNT||'|'||QUANTITY||'|'||PRIN_PAYDOWN_APPLIED||'|'||DFRD_INT_PAID_APPLIED||'|'||CLOSE_SETTLECYMD||'|'||TAX_YEAR||'|'||CUSIP||'|'||DLY_YB_MKT_DISC_RATE||'|'||PERIOD_YB_MARKET_DISCOUNT||'|'||YEAR_TO_DATE_YB_MKT_DISC||'|'||DLY_YB_ACQ_PREM_RATE||'|'||PERIOD_YB_ACQ_PREM||'|'||YEAR_TO_DATE_YB_ACQ_PREM||'|'||LIFE_TO_DATE_YB_ACQ_PREM||'|'||DLY_QSI_RATE||'|'||PERIOD_QSI_RATE||'|'||YEAR_TO_DATE_QSI||'|'||LIFE_TO_DATE_QSI||'|'||YB_ADJUSTED_COST_BASIS||'|'||ADJ_CB_CURR_YB_MKT_DISC||'|'||TOT_ACCRUED_YB_MKT_DISC||'|'||FOREIGN_CURR_CODE||'|'||FOREIGN_EXCHG_RATE_FLAG||'|'||FOREIGN_EXCHG_RATE||'|'||REPORTABLE_QSI||'|'||REPORTABLE_BPR||'|'||ACCT_ID||'|'||SECURITY_ID||'|'||DAILY_NQSI_RATE||'|'||APPLIED_COST||'|'||PRINCIPAL_BALANCE||'|'||YIELD||'|'||PERIOD_NQSI_PYMT||'|'||PERIOD_PRO_NQB||'|'||REC_TYPE||'|'||ELECTION_CODE||'|' FROM FIP_HPS_DETAIL WHERE ACCT_NO='$1' and SEC_NO='$2';
+   # *** protected query *** 
    spool off
 
    --CA_ACCT_SEC
    spool $1-$2-cas.txt
-   select ACCOUNT_ID||'|'||SECURITY_ID||'|'||CA_ID||'|'||PROCESS_STATUS||'|'||CREATEDBY||'|'||CREATEDDATE||'|'||MODIFIEDBY||'|'||MODIFIEDDATE||'|'||DELETEFLAG||'|'||CAAS_ID||'|'||CA_TYPE_ID||'|'||CA_EFF_DATE||'|'||ROUND_UP_SHARES||'|'||STATUS_FLAG||'|'||IN_OUT_IND||'|'||CIL_TXN_ID||'|'||CIL_CAAS_ID||'|' from CA_ACCT_SEC WHERE ACCOUNT_ID='$BO_ID-$FIRM_NO-$SUB_NO-$1' and SECURITY_ID='$BO_ID-$2';
+   # *** protected query *** 
    spool off
 
    --CORP_ACT
    spool $1-$2-cpa.txt
-   select CA_ID||'|'||CA_TYPE_ID||'|'||ASSET_TYPE_ID||'|'||EX_DATE||'|'||PAY_DATE||'|'||ATL_DAYS||'|'||DTL_DAYS||'|'||TOL_QTY||'|'||ROUND_OFF_DIGITS||'|'||WORK_STATUS||'|'||SYMBOL||'|'||NOTICE_DATE||'|'||EFFECTIVE_DATE||'|'||CA_TYPE||'|'||TARGET_CUSIP||'|'||CA_STATUS_CODE||'|'||VOL_MAND_CODE||'|'||TAXABILITY||'|'||APPLICATION_ORDER||'|'||TARGET_DESC||'|'||CASH_RATE||'|'||SHARE_RATE||'|'||RECORD_DATE||'|'||CAN_REASON_CODE||'|'||ANNOUNCEMENT_DATE||'|'||DTC_PRORATION_DATE||'|'||ELIGIBLITY_DATE||'|'||ESTIMATE_FINAL_CODE||'|'||EXP_DATE||'|'||OFFEROR_NAME||'|'||OFFEROR_CUSIP||'|'||RELATED_CA_EVENT_ID||'|'||EVENT_CODE||'|'||RELATED_EVENT_CODE||'|'||STATUS_CODE_QUALIFIER||'|'||CREATEDBY||'|'||CREATEDDATE||'|'||MODIFIEDBY||'|'||MODIFIEDDATE||'|'||VERSIONNUM||'|'||DELETEFLAG||'|'||CA_EVENT_NO||'|'||FILENAME||'|'||CORP_ACT_ID||'|'||TERMINATION_DATE||'|'||CONDITIONAL||'|'||OPERATOR||'|'||THRESHOLD||'|'||SEDOL||'|'||ISIN_COUNTRY_CODE||'|'||ISIN_ID||'|'||ISIN_CHK_DIGIT||'|'||ALLOWFRAC||'|'||FRACOPTION||'|'||PREPROCESS_FLAG||'|'||SHARE_RATE_FRAC_NUMERATOR||'|'||SHARE_RATE_FRAC_DENOMINATOR||'|'||SUB_STATUS||'|'||REDM||'|'||OLD_CA_ID||'|' from CORP_ACT where target_cusip in (select cusip from svi_rad where acct_no='$1' and sec_no='$2') and work_status='READY';
+   # *** protected query *** 
 
    --CORP_ACT_PAYOUT
    spool $1-$2-cap.txt
-   select CA_ID||'|'||PAYOUTID||'|'||PAYOUT_OPTION_NO||'|'||SEQ_NO||'|'||CASH_SHARE_FLAG||'|'||TAXABLE_FLAG||'|'||CONTRA||'|'||PRORATION_RATE||'|'||PRORATION_ROUNDING||'|'||AMT||'|'||PRORATION_AMT||'|'||NEW_CUSIP||'|'||NEW_DESC||'|'||NEW_SHARE_RATE||'|'||FMV||'|'||ALLOCATION_PCT||'|'||ROUNDING_CODE||'|'||SHARES||'|'||PRORATED_SHARES||'|'||ROUNDING_FRACTION||'|'||CREATEDBY||'|'||CREATEDDATE||'|'||MODIFIEDBY||'|'||MODIFIEDDATE||'|'||VERSIONNUM||'|'||DELETEFLAG||'|'||CONTYPE||'|'||CONAMOUNT||'|'||SEDOL||'|'||ISIN_COUNTRY_CODE||'|'||ISIN_ID||'|'||ISIN_CHK_DIGIT||'|'||SHARE_RATE_FRAC_NUMERATOR||'|'||SHARE_RATE_FRAC_DENOMINATOR||'|'||REDM||'|' from CORP_ACT_PAYOUT where ca_id in (select ca_id from corp_act where target_cusip in (select cusip from svi_rad where acct_no='$1' and sec_no='$2') and work_status='READY');
+   # *** protected query *** 
 
 
    --CORP_ACT_BROKER
    spool $1-$2-cab.txt
-   select CA_ID||'|'||BROKER_ID||'|'||ATL_DAYS||'|'||DTL_DAYS||'|'||TOL_QTY||'|'||ACTIVE_FLAG||'|'||CREATEDBY||'|'||CREATEDDATE||'|'||MODIFIEDBY||'|'||MODIFIEDDATE||'|'||VERSIONNUM||'|'||DELETEFLAG||'|'||CA_DELIVERYCODE||'|'||CA_RECEIPTCODE||'|' from CORP_ACT_BROKER where ca_id in (select ca_id from corp_act where target_cusip in (select cusip from svi_rad where acct_no='$1' and sec_no='$2') and work_status='READY') and broker_id='$CLIENT_ID' and deleteflag='N';
+   # *** protected query *** 
 
 
    --CORP_ACT_TERMS
    spool $1-$2-cat.txt
-   select CA_ID||'|'||TERM_ID||'|'||TERMS||'|'||CREATEDBY||'|'||CREATEDDATE||'|'||MODIFIEDBY||'|'||MODIFIEDDATE||'|'||VERSIONNUM||'|'||DELETEFLAG||'|' from CORP_ACT_TERMS where ca_id in (select ca_id from corp_act where target_cusip in (select cusip from svi_rad where acct_no='$1' and sec_no='$2') and work_status='READY') and deleteflag='N';
+   # *** protected query *** 
 
    --DISABLED_CA
    spool $1-$2-dca.txt
-   select BROKER_ID||'|'||CA_ID||'|'||CREATEDBY||'|'||CREATEDDATE||'|'||MODIFIEDBY||'|'||MODIFIEDDATE||'|'||DELETEFLAG||'|' from DISABLED_CA where ca_id in (select ca_id from corp_act where target_cusip in (select cusip from svi_rad where acct_no='$1' and sec_no='$2') and work_status='READY') and broker_id='$CLIENT_ID';
+   # *** protected query *** 
 
    --STEPUP_TRANSACTIONS
    spool $1-$2-sut.txt
-   select SU_ID||'|'||IFCE_ID||'|'||IFCE_TABLE||'|'||ACCT_NO||'|'||SEC_NO||'|'||STEPDATE||'|'||STEPUP_PCT||'|'||FMV||'|'||QTY||'|'||COST||'|'||CREATEDBY||'|'||CREATEDDATE||'|'||MODIFIEDBY||'|'||MODIFIEDDATE||'|'||PROCESS_STATUS||'|'||DELETEFLAG||'|'||ORIGINAL_LOT_ID||'|'||ERROR_CODE||'|'||AVDATE||'|' from STEPUP_TRANSACTIONS where acct_no='$1' and sec_no='$2';
+   # *** protected query *** 
 
    --VP_TRANSACTION
    spool $1-$2-vpt.txt
-   select ACCT_ID||'|'||SECURITY_ID||'|'||IFCE_SELL_ID||'|'||IFCE_BUY_ID||'|'||INV_QTY||'|'||STATUS||'|'||PROCESS_STATUS||'|'||DELETEFLAG||'|'||CREATEDDATE||'|'||MODIFIEDDATE||'|'||SEQ_NO||'|'||VPTXN_ID||'|'||ORIGINAL_LOT_ID||'|' from VP_TRANSACTION where acct_id='$BO_ID-$FIRM_NO-$SUB_NO-$1' and security_id='$BO_ID-$2';
+   # *** protected query *** 
 
    --FI_ELECTION
    spool $1-$2-fie.txt
-   select ELECTION_ID||'|'||ACCT_NO||'|'||SEC_NO||'|'||ELECTION_TYPE||'|'||PAYER_OPTION||'|'||APPLICABLE_LEVEL||'|'||CREATEDDATE||'|'||CREATEDBY||'|'||MODIFIEDDATE||'|'||MODIFIEDBY||'|'||ERROR_CODE||'|'||DELETEFLAG||'|'||PROCESS_STATUS||'|' from FI_ELECTION where acct_no='$1' and sec_no='$2';
+   # *** protected query *** 
 
 
 quit
@@ -163,73 +163,61 @@ sqlplus -s $DB_USER/$DB_PASS@$ORACLE_SID<<!
    set serverout on
    set linesize 700
 
-   spool $1-am.txt
-   SELECT ACCT_ID||'|'||ACCT_NO||'|'||INVESTOR_ID||'|'||ACCT_TYPE_ID||'|'||ACCT_NAME||'|'||BROKER_ID||'|'||BRANCH_CD||'|'||CREATEDBY||'|'||CREATEDDATE||'|'||MODIFIEDBY||'|'||MODIFIEDDATE||'|'||DELETEFLAG||'|'||VERSIONNUM||'|'||WASH_SALE_FLAG||'|'||TAX_FLAG||'|'||SUB_NO||'|'||FIRM_NO||'|'||REP||'|'||BO_ID||'|'||TAX_BRACKET||'|'||ST_PRIOR_YEAR_LOSS||'|'||LT_PRIOR_YEAR_LOSS||'|'||IS_ROLL||'|'||TAX_TYPE||'|'||MANAGED_ACCT_IND||'|'||ACTIVE_FLAG||'|'||IRA_IND||'|'||TAX_LOT_METHOD||'|'||STATEMENT_IND||'|'||REINVEST_ROLLUP||'|'||PRCSS_13_MNTH_IND||'|'||LE_ENABLED||'|'||TRAILER1||'|'||'|'||TAXROLLBACK||'|' from account_master where acct_no='$1';
+   spool $1-$2-am.txt
+   SELECT COL1||'|'||COL2||'|'||COL3||'|' from tab1 where col2='$1';
    spool off
 
-   spool $1-seed.txt
-   SELECT IFCE_SEED_ID||'|'||SVI_RECCODE||'|'||SVI_DATADATE||'|'||BO_ID||'|'||CLIENT_ID||'|'||BRANCH_CD||'|'||SVI_SOURCE_CD||'|'||FIRM_NO||'|'||SUB_NO||'|'||ACCT_NO||'|'||ACCT_TYPE||'|'||CUSIP||'|'||FACTOR||'|'||QUANTITY||'|'||REP||'|'||SEC_NO||'|'||SEC_TYPE||'|'||SETTLE_CYMD||'|'||SETTLE_QTY||'|'||SYMBOL||'|'||PROCESS_STATUS||'|'||ERROR_CODE||'|'||CREATEDBY||'|'||CREATEDDATE||'|'||MODIFIEDBY||'|'||MODIFIEDDATE||'|'||DELETEFLAG||'|'||VERSIONNUM||'|'||IFCE_ID||'|'||BIG_PRX||'|'||NET_AMT||'|'||HOLDING_DATE||'|'||LONG_SHORT_POS||'|'||DESC1||'|'||DESC2||'|'||DESC3||'|'||TXN_DATE||'|'||DBASIS||'|'||ACATTYPE||'|'||ODATE||'|'||STRIKE_PRX||'|'||EXPIRE_CYMD||'|'||UNDERLYING_SEC||'|'||PUT_CALL_IND||'|'||SUB_TYPE||'|'||ROOT_SYMBOL||'|'||MKT_SYMBOL||'|'||TRADE_NO||'|'||CURRENCY||'|'||IMPORT_TYPE||'|'||CUC_FLAG||'|'||DRP_FLAG||'|'||SUBLOT_IND||'|'||LOT_TXN_ID||'|'||PRN_FACTOR||'|'||EXCHANGE_RATE||'|'||FOREIGN_NET_AMT||'|'||SEDOL||'|'||ISIN_COUNTRY_CODE||'|'||ISIN_ID||'|'||ISIN_CHK_DIGIT||'|'||OPEN_SETTLE_CYMD||'|'||PURCHASE_AWAY||'|'||COUPON_RATE||'|'||ORIGINAL_COST||'|' from svi_seed where acct_no='$1';
+   spool $1-$2-seed.txt
+   # *** protected query *** 
    spool off
 
-   spool $1-trd.txt
-   SELECT IFCE_TXN_ID||'|'||SVI_RECCODE||'|'||SVI_DATADATE||'|'||BO_ID||'|'||CLIENT_ID||'|'||BRANCH_CD||'|'||SVI_SOURCE_CD||'|'||FIRM_NO||'|'||SUB_NO||'|'||ACCT_NO||'|'||ACCT_TYPE||'|'||REP||'|'||SEC_NO||'|'||CUSIP||'|'||SEC_TYPE||'|'||SYMBOL||'|'||TRADE_CYMD||'|'||ASOF_CYMD||'|'||SETTLE_CYMD||'|'||BIG_QTY||'|'||BIG_PRX||'|'||PURCH_OR_SALE||'|'||BIG_EXCH||'|'||NET_AMT||'|'||OFFSET_TYPE||'|'||FOREIGN_CURR||'|'||DESC1||'|'||DESC2||'|'||DESC3||'|'||DESC4||'|'||DESC5||'|'||DESC6||'|'||BOND_TYPE||'|'||COUPON_RATE||'|'||CONV_FACTOR||'|'||PRICE_FACTOR||'|'||BASIS_PRX||'|'||BASIS_YIELD||'|'||PRINCIPAL_AMT||'|'||INTEREST_AMT||'|'||SEC_FEE_AMT||'|'||COMM_AMT||'|'||GROSS_COMM||'|'||GROSS_PCNT_IND||'|'||CONCESSION_AMT||'|'||HANDLE_FEE_AMT||'|'||LOOKALIKE||'|'||EQUIV_DISCOUNT||'|'||DISCOUNT||'|'||TOTAL_ORD_QTY||'|'||TOTAL_ORD_COMM||'|'||POSTAGE_AMT||'|'||SEC_CLASS||'|'||CANCEL_IND||'|'||REBILL_IND||'|'||SPEC_TYPE_1||'|'||SPEC_TYPE_2||'|'||SPEC_TYPE_3||'|'||CONFIRM_NOTE||'|'||ORDER_SOURCE||'|'||OCC_IND||'|'||NET_FEE_AMT||'|'||TRD_TIMESTAMP||'|'||COUNTRY_CODE||'|'||OFF_COUNTRY_CODE||'|'||ADJUST_SW||'|'||REINVEST_SW||'|'||TAX_LOT||'|'||FX_IND||'|'||YIELD_TO_MATURITY||'|'||MATURITY_CYMD||'|'||TRADE_CYMD_CONV||'|'||ASOF_CYMD_CONV||'|'||SETTLE_CYMD_CONV||'|'||MATURITY_CYMD_CONV||'|'||BUY_SELL_IND||'|'||OPT_TYPE||'|'||PROCESS_STATUS||'|'||ERROR_CODE||'|'||CREATEDBY||'|'||CREATEDDATE||'|'||MODIFIEDBY||'|'||MODIFIEDDATE||'|'||DELETEFLAG||'|'||VERSIONNUM||'|'||IFCE_RAD_ID||'|'||IFCE_RCK_ID||'|'||LRM_ID||'|'||PREMIUM||'|'||WASH_AMT||'|'||TXN_EVENT_ID||'|'||BUY_SELL_IND_ORG||'|'||STRIKE_PRX||'|'||EXPIRE_CYMD||'|'||UNDERLYING_SEC||'|'||PUT_CALL_IND||'|'||SUB_TYPE||'|'||ROOT_SYMBOL||'|'||MKT_SYMBOL||'|'||TRADE_NO||'|'||CURRENCY||'|'||CUC_FLAG||'|'||DRP_FLAG||'|'||PRN_FACTOR||'|'||EXCHANGE_RATE||'|'||FOREIGN_NET_AMT||'|'||SEDOL||'|'||ISIN_COUNTRY_CODE||'|'||ISIN_ID||'|'||ISIN_CHK_DIGIT||'|'||VSP_DATES||'|'||IS_SETTLED_FLAG||'|'||SEC_FEE_AMT2||'|'||COMM_AMT2||'|'||BR_MISC1||'|'||BR_MISC2||'|'||BR_MISC3||'|'||EXCHOUT_IND||'|' from svi_trd where acct_no='$1';
+   spool $1-$2-trd.txt
+   # *** protected query *** 
    spool off
 
-   spool $1-rad.txt
-   SELECT IFCE_TXN_ID||'|'||SVI_RECCODE||'|'||SVI_DATADATE||'|'||BO_ID||'|'||CLIENT_ID||'|'||BRANCH_CD||'|'||SVI_SOURCE_CD||'|'||FIRM_NO||'|'||SUB_NO||'|'||ACCT_NO||'|'||ACCT_TYPE||'|'||REP||'|'||SEC_NO||'|'||CUSIP||'|'||SEC_TYPE||'|'||SYMBOL||'|'||TRADE_CYMD||'|'||ASOF_CYMD||'|'||SETTLE_CYMD||'|'||BIG_QTY||'|'||BIG_PRX||'|'||PURCH_OR_SALE||'|'||BIG_EXCH||'|'||NET_AMT||'|'||OFFSET_TYPE||'|'||FOREIGN_CURR||'|'||DESC1||'|'||DESC2||'|'||DESC3||'|'||DESC4||'|'||DESC5||'|'||DESC6||'|'||BOND_TYPE||'|'||SEC_CLASS||'|'||COUNTRY_CODE||'|'||OFF_COUNTRY_CODE||'|'||ADJUST_SW||'|'||REINVEST_SW||'|'||SOURCE||'|'||REC_TYPE||'|'||TRADE_CYMD_CONV||'|'||ASOF_CYMD_CONV||'|'||SETTLE_CYMD_CONV||'|'||IN_OUT_IND||'|'||LONG_SHORT_IND||'|'||PROCESS_STATUS||'|'||ERROR_CODE||'|'||CREATEDBY||'|'||CREATEDDATE||'|'||MODIFIEDBY||'|'||MODIFIEDDATE||'|'||DELETEFLAG||'|'||VERSIONNUM||'|'||LRM_ID||'|'||IFCE_RAD_ID||'|'||HOLDING_DATE||'|'||LONG_SHORT_POS||'|'||PAIR_ID||'|'||RELATED_ACCT||'|'||TRAN_ID||'|'||DBASIS||'|'||ACATTYPE||'|'||ODATE||'|'||STRIKE_PRX||'|'||EXPIRE_CYMD||'|'||UNDERLYING_SEC||'|'||PUT_CALL_IND||'|'||SUB_TYPE||'|'||ROOT_SYMBOL||'|'||MKT_SYMBOL||'|'||TRADE_NO||'|'||CURRENCY||'|'||CUC_FLAG||'|'||DRP_FLAG||'|'||PRN_FACTOR||'|'||TRAN_CTN_NUM||'|'||ALT_TRAN_CTN_NUM||'|'||IN_OUT_FIRM_NUM||'|'||IN_OUT_FIRM_TYPE||'|'||IN_OUT_FIRM_ACCT_NO||'|'||ISIN_COUNTRY_CODE||'|'||ISIN_ID||'|'||ISIN_CHK_DIGIT||'|'||CERT_NUM_PFX||'|'||CERT_NUM||'|'||BASIS_SHP||'|'||TAX_RPT_ITA||'|'||EXCHANGE_RATE||'|'||TAXL_ORIG_COST||'|'||TAXL_CUR_COST||'|'||ZERO_BASIS_IND||'|'||LOT_HOLDING_DATE||'|'||SEDOL||'|'||CANCEL_IND||'|'||SETTLEMENT_FLAG||'|'||FOREIGN_NET_AMT||'|'||SEC_SUBTYPE||'|'||IMPORT_TYPE||'|'||TRANSFER_TYPE||'|'||EX_DATE||'|'||PAY_DATE||'|'||RECORD_DATE||'|'||DIV_RATE||'|'||OPT_DIV_RATE||'|'||CONTROL_ID||'|'||EFFECTIVE_DATE||'|'||ORIGINAL_CUSIP||'|'||STEPUP_PCT||'|'||ACAT_SEQ_NUM||'|'||EXCHANGE_RATE_FMV||'|'||XFER_QTY||'|'||XFER_CUSIP||'|'||MARKET_DISCOUNT||'|'||BOND_PREMIUM||'|'||ACQUISTION_PREMIUM||'|'||ACCRUED_OID||'|'||WASH_SALE_ADJ_AMT||'|'||ACC_MAR_DIS_ELEC||'|'||INCL_MAR_DIS_INC_ELE||'|'||INT_AS_OID_ELECTION||'|'||AMORT_PRE_ELEC||'|'||SPOTRATE_ELECTION||'|'||BR_MISC1||'|'||BR_MISC2||'|'||BR_MISC3||'|'||INTEREST_AMT||'|'||AVDATE||'|'||LAST_ADJ_DATE||'|'||CARRY_OFFSET||'|'||DIS_CARRY_OFFSET||'|'||PRIOR_YEAR_MARKTOMARKET||'|'||PURCHASE_AWAY||'|'||COUPON_RATE||'|'||CA_ID||'|' from svi_rad where acct_no='$1';
+   spool $1-$2-rad.txt
+   # *** protected query *** 
    spool off
 
-   spool $1-cli.txt
-   SELECT IFCE_CLI_ID||'|'||TRADE_NO||'|'||BO_ID||'|'||FIRM_ID||'|'||SUB_NO||'|'||ACCT_NO||'|'||ACCT_TYPE||'|'||CUSIP||'|'||SEC_NO||'|'||SYMBOL||'|'||EXPIRE_CYMD||'|'||STRIKE_PRX||'|'||UNDERLYING_SEC||'|'||PUT_CALL_IND||'|'||SEC_TYPE||'|'||DESC1||'|'||DESC2||'|'||DESC3||'|'||QUANTITY||'|'||ACQUISITION_CYMD||'|'||ADJ_BASIS||'|'||WASH_AMT||'|'||LONG_SHORT_IND||'|'||TRAILER||'|'||DISPOSITION_CYMD||'|'||SVI_SOURCE_CD||'|'||PROCEEDS||'|'||BRANCH_CODE||'|'||LOT_HOLDING_DATE||'|'||LONG_TERM_GL||'|'||SHORT_TERM_GL||'|'||CLOSING_TXN_ID||'|'||PROCESS_STATUS||'|'||ERROR_CODE||'|'||CREATEDBY||'|'||CREATEDDATE||'|'||MODIFIEDBY||'|'||MODIFIEDDATE||'|'||DELETEFLAG||'|'||VERSIONNUM||'|'||CLIENT_ID||'|'||OPEN_SETTLEMENT_DATE||'|'||OPEN_PRICE||'|'||CLOSE_SETTLEMENT_DATE||'|'||CLOSE_PRICE||'|'||TAXABLE_FLAG||'|'||ROOT_SYMBOL||'|'||EXTERNAL_IND||'|'||CUC_FLAG||'|'||CLOSING_TRAILER||'|'||CURRENCY_RATE||'|'||LOSS_NOT_ALLOWED||'|'||GFT_INH_IND||'|'||GIFT_DT||'|'||FMV_AS_OF_DT||'|'||REPORTABLE_FLAG||'|'||RELATED_OPENLOT_FLAG||'|'||TRANSACTION_TYPE||'|'||IS_RR||'|'||OPEN_SUBLOT_IND||'|' from svi_cli where acct_no='$1';
+   spool $1-$2-cli.txt
+   # *** protected query *** 
    spool off
 
-   spool $1-fim.txt
-   SELECT FIP_HPS_MASTER_ID||'|'||WSC_ID||'|'||ACCT_NO||'|'||SEC_NO||'|'||RECORD_TYPE||'|'||PROPRIETARY_SECURITY||'|'||SERVICE_INDICATOR||'|'||SECURITY_ISSUE_TYPE||'|'||INTEREST_TYPE||'|'||NQSI_INDICATOR||'|'||PUBLICATION_INDICATOR||'|'||AMT_INDICATOR||'|'||DAY_BASIS||'|'||DATA_STATUS_CODE||'|'||BOND_UNIT_FACTOR||'|'||FILE_RUN_DATE||'|'||TAX_CODE||'|'||TOTAL_OID||'|'||TOTAL_ACQ_PREM||'|'||TOTAL_BOND_PRE_PRO||'|'||TOTAL_MARKET_DISCOUNT||'|'||CREATED_BY||'|'||CREATED_DATE||'|'||MODIFIED_BY||'|'||MODIFIED_DATE||'|'||PROCESS_STATUS||'|'||ERROR_CODE||'|'||SENT_TO_PROVIDER||'|'||DELETEFLAG||'|'||CALL_DATE||'|'||TOTAL_PRNCPL_PAYMT||'|'||TOTAL_DFRD_INT_PAID||'|'||TAX_LOT_IDENTIFIER||'|'||MATURITY_DATE||'|'||OID_ACCRUAL_APPLIED||'|'||SL_ACQ_PREMIUM_APPLIED||'|'||SL_MARKET_DISCOUNT_APPLIED||'|'||BOND_PREMIUM_APPLIED||'|'||PRIN_PAYDOWN_APPLIED||'|'||DFRD_INT_PAID_APPLIED||'|'||TAX_YEAR||'|'||NQSI_PREMIUM_APPLIED||'|'||CUSIP||'|'||QUANTITY||'|'||CLOSE_SETTLECYMD||'|'||CLOSE_TRADECYMD||'|'||ISSUE_DT||'|'||ISSUE_PRICE||'|'||TOTAL_YB_MARKET_DISCOUNT||'|'||TOTAL_YB_ACQ_PREM||'|'||TOTAL_QSI||'|'||YB_ACQ_PREMIUM_APPLIED||'|'||YB_MARKET_DISCOUNT_APPLIED||'|'||TREAT_ALLQSI_APPLIED||'|'||TOTAL_REPORT_QSI||'|'||TOTAL_REPORT_BPR||'|'||BOND_PREM_APPLD_PER_YEAR||'|'||OID_APPLD_PER_YEAR||'|'||ACQ_APPLD_PER_YEAR||'|'||NQSI_APPLD_PER_YEAR||'|'||MDI_APPLD_PER_YEAR||'|'||TAOID_APPLD_PER_YEAR||'|'||LIFETODTAPPLIEYR||'|'||ACCT_ID||'|'||SECURITY_ID||'|'||TOTAL_PRO_INT_NQB||'|'||TOTAL_NQSI_PYMT||'|'||REC_TYPE||'|' FROM FIP_HPS_MASTER WHERE ACCT_NO='$1';
+   spool $1-$2-fim.txt
+   # *** protected query *** 
    spool off
 
-   spool $1-fid.txt
-   SELECT WSC_ID||'|'||ACCT_NO||'|'||SEC_NO||'|'||RECORD_TYPE||'|'||LOT_NUMBER||'|'||CUSTOMIZED_STRIP_CALCULATION||'|'||BEGIN_DATE||'|'||PERIOD_TYPE||'|'||CALL_INDICATOR||'|'||DAILY_OID_ACCRUAL_RATE||'|'||ACCRUAL_DAYS||'|'||FACE_AMOUNT||'|'||PERIOD_OID_ACCRUAL||'|'||ADJUSTED_ISSUE_PRICE||'|'||ORIGINAL_COST_BASIS||'|'||PURCHASE_CONDITION||'|'||ACQ_PREM_AMOR_RATIO||'|'||PERIOD_FIXED_ACQ_PREM||'|'||DAILY_PREMIUM_AMOR_INT||'|'||PERIOD_BOND_PRE_PRO||'|'||DAILY_MKT_DISC_RATE||'|'||PERIOD_MARKET_DISCOUNT||'|'||ADJUSTED_COST_BASIS_CUR_MD||'|'||TOTAL_ACCRUED_MARKET_DISCOUNT||'|'||ADJUSTED_COST_BASIS_NO_DMD||'|'||END_DATE||'|'||ORIGINAL_PURCHASE_DATE||'|'||PURCHASE_AIP||'|'||CREATED_BY||'|'||CREATED_DATE||'|'||MODIFIED_BY||'|'||MODIFIED_DATE||'|'||PROCESS_STATUS||'|'||ERROR_CODE||'|'||SENT_TO_PROVIDER||'|'||DELETEFLAG||'|'||TAX_LOT_IDENTIFIER||'|'||LIFE_TO_DATE_NET_OID||'|'||YEAR_TO_DATE_NET_OID||'|'||YEAR_TO_DATE_BOND_PREM||'|'||YEAR_TO_DATE_MARKET_DISCOUNT||'|'||LIFE_TO_DATE_OID||'|'||LIFE_TO_DATE_BOND_PREM||'|'||YEAR_TO_DATE_OID||'|'||LIFE_TO_DATE_ACQ_PREM||'|'||YEAR_TO_DATE_ACQ_PREM||'|'||DEFERRED_INT_PAID||'|'||PURCH_TO_DATE_D_INT||'|'||PRINCIPAL_PMNT||'|'||ORIGINAL_COST||'|'||ORIGINAL_QTY||'|'||DAY_COUNT||'|'||OID_ACCRUAL_TILL_DATE||'|'||BOND_PREMIUM_DAILY_AMOUNT||'|'||BOND_PREMIUM_APPLIED||'|'||CLOSE_TRADECYMD||'|'||FIP_HPS_DETAIL_ID||'|'||PURCH_TO_DATE_PRNCP_PMNT||'|'||QUANTITY||'|'||PRIN_PAYDOWN_APPLIED||'|'||DFRD_INT_PAID_APPLIED||'|'||CLOSE_SETTLECYMD||'|'||TAX_YEAR||'|'||CUSIP||'|'||DLY_YB_MKT_DISC_RATE||'|'||PERIOD_YB_MARKET_DISCOUNT||'|'||YEAR_TO_DATE_YB_MKT_DISC||'|'||DLY_YB_ACQ_PREM_RATE||'|'||PERIOD_YB_ACQ_PREM||'|'||YEAR_TO_DATE_YB_ACQ_PREM||'|'||LIFE_TO_DATE_YB_ACQ_PREM||'|'||DLY_QSI_RATE||'|'||PERIOD_QSI_RATE||'|'||YEAR_TO_DATE_QSI||'|'||LIFE_TO_DATE_QSI||'|'||YB_ADJUSTED_COST_BASIS||'|'||ADJ_CB_CURR_YB_MKT_DISC||'|'||TOT_ACCRUED_YB_MKT_DISC||'|'||FOREIGN_CURR_CODE||'|'||FOREIGN_EXCHG_RATE_FLAG||'|'||FOREIGN_EXCHG_RATE||'|'||REPORTABLE_QSI||'|'||REPORTABLE_BPR||'|'||ACCT_ID||'|'||SECURITY_ID||'|'||DAILY_NQSI_RATE||'|'||APPLIED_COST||'|'||PRINCIPAL_BALANCE||'|'||YIELD||'|'||PERIOD_NQSI_PYMT||'|'||PERIOD_PRO_NQB||'|'||REC_TYPE||'|'||ELECTION_CODE||'|' FROM FIP_HPS_DETAIL WHERE ACCT_NO='$1';
+   spool $1-$2-fid.txt
+   # *** protected query *** 
    spool off
 
-   --CA_ACCT_SEC
-   spool $1-cas.txt
-   select ACCOUNT_ID||'|'||SECURITY_ID||'|'||CA_ID||'|'||PROCESS_STATUS||'|'||CREATEDBY||'|'||CREATEDDATE||'|'||MODIFIEDBY||'|'||MODIFIEDDATE||'|'||DELETEFLAG||'|'||CAAS_ID||'|'||CA_TYPE_ID||'|'||CA_EFF_DATE||'|'||ROUND_UP_SHARES||'|'||STATUS_FLAG||'|'||IN_OUT_IND||'|'||CIL_TXN_ID||'|'||CIL_CAAS_ID||'|' from CA_ACCT_SEC WHERE ACCOUNT_ID='$BO_ID-$FIRM_NO-$SUB_NO-$1';
+   spool $1-$2-cas.txt
+   # *** protected query *** 
    spool off
 
-   --CORP_ACT
-   spool $1-cpa.txt
-   select CA_ID||'|'||CA_TYPE_ID||'|'||ASSET_TYPE_ID||'|'||EX_DATE||'|'||PAY_DATE||'|'||ATL_DAYS||'|'||DTL_DAYS||'|'||TOL_QTY||'|'||ROUND_OFF_DIGITS||'|'||WORK_STATUS||'|'||SYMBOL||'|'||NOTICE_DATE||'|'||EFFECTIVE_DATE||'|'||CA_TYPE||'|'||TARGET_CUSIP||'|'||CA_STATUS_CODE||'|'||VOL_MAND_CODE||'|'||TAXABILITY||'|'||APPLICATION_ORDER||'|'||TARGET_DESC||'|'||CASH_RATE||'|'||SHARE_RATE||'|'||RECORD_DATE||'|'||CAN_REASON_CODE||'|'||ANNOUNCEMENT_DATE||'|'||DTC_PRORATION_DATE||'|'||ELIGIBLITY_DATE||'|'||ESTIMATE_FINAL_CODE||'|'||EXP_DATE||'|'||OFFEROR_NAME||'|'||OFFEROR_CUSIP||'|'||RELATED_CA_EVENT_ID||'|'||EVENT_CODE||'|'||RELATED_EVENT_CODE||'|'||STATUS_CODE_QUALIFIER||'|'||CREATEDBY||'|'||CREATEDDATE||'|'||MODIFIEDBY||'|'||MODIFIEDDATE||'|'||VERSIONNUM||'|'||DELETEFLAG||'|'||CA_EVENT_NO||'|'||FILENAME||'|'||CORP_ACT_ID||'|'||TERMINATION_DATE||'|'||CONDITIONAL||'|'||OPERATOR||'|'||THRESHOLD||'|'||SEDOL||'|'||ISIN_COUNTRY_CODE||'|'||ISIN_ID||'|'||ISIN_CHK_DIGIT||'|'||ALLOWFRAC||'|'||FRACOPTION||'|'||PREPROCESS_FLAG||'|'||SHARE_RATE_FRAC_NUMERATOR||'|'||SHARE_RATE_FRAC_DENOMINATOR||'|'||SUB_STATUS||'|'||REDM||'|'||OLD_CA_ID||'|' from CORP_ACT where target_cusip in (select cusip from svi_rad where acct_no='$1') and work_status='READY';
+   spool $1-$2-cpa.txt
+   # *** protected query *** 
 
-   --CORP_ACT_PAYOUT
-   spool $1-cap.txt
-   select CA_ID||'|'||PAYOUTID||'|'||PAYOUT_OPTION_NO||'|'||SEQ_NO||'|'||CASH_SHARE_FLAG||'|'||TAXABLE_FLAG||'|'||CONTRA||'|'||PRORATION_RATE||'|'||PRORATION_ROUNDING||'|'||AMT||'|'||PRORATION_AMT||'|'||NEW_CUSIP||'|'||NEW_DESC||'|'||NEW_SHARE_RATE||'|'||FMV||'|'||ALLOCATION_PCT||'|'||ROUNDING_CODE||'|'||SHARES||'|'||PRORATED_SHARES||'|'||ROUNDING_FRACTION||'|'||CREATEDBY||'|'||CREATEDDATE||'|'||MODIFIEDBY||'|'||MODIFIEDDATE||'|'||VERSIONNUM||'|'||DELETEFLAG||'|'||CONTYPE||'|'||CONAMOUNT||'|'||SEDOL||'|'||ISIN_COUNTRY_CODE||'|'||ISIN_ID||'|'||ISIN_CHK_DIGIT||'|'||SHARE_RATE_FRAC_NUMERATOR||'|'||SHARE_RATE_FRAC_DENOMINATOR||'|'||REDM||'|' from CORP_ACT_PAYOUT where ca_id in (select ca_id from corp_act where target_cusip in (select cusip from svi_rad where acct_no='$1') and work_status='READY');
+   spool $1-$2-cap.txt
+   # *** protected query *** 
 
+   spool $1-$2-cab.txt
+   # *** protected query *** 
 
-   --CORP_ACT_BROKER
-   spool $1-cab.txt
-   select CA_ID||'|'||BROKER_ID||'|'||ATL_DAYS||'|'||DTL_DAYS||'|'||TOL_QTY||'|'||ACTIVE_FLAG||'|'||CREATEDBY||'|'||CREATEDDATE||'|'||MODIFIEDBY||'|'||MODIFIEDDATE||'|'||VERSIONNUM||'|'||DELETEFLAG||'|'||CA_DELIVERYCODE||'|'||CA_RECEIPTCODE||'|' from CORP_ACT_BROKER where ca_id in (select ca_id from corp_act where target_cusip in (select cusip from svi_rad where acct_no='$1') and work_status='READY') and broker_id='$CLIENT_ID' and deleteflag='N';
+   spool $1-$2-cat.txt
+   # *** protected query *** 
 
+   spool $1-$2-dca.txt
+   # *** protected query *** 
 
-   --CORP_ACT_TERMS
-   spool $1-cat.txt
-   select CA_ID||'|'||TERM_ID||'|'||TERMS||'|'||CREATEDBY||'|'||CREATEDDATE||'|'||MODIFIEDBY||'|'||MODIFIEDDATE||'|'||VERSIONNUM||'|'||DELETEFLAG||'|' from CORP_ACT_TERMS where ca_id in (select ca_id from corp_act where target_cusip in (select cusip from svi_rad where acct_no='$1') and work_status='READY') and deleteflag='N';
+   spool $1-$2-sut.txt
+   # *** protected query *** 
 
-   --DISABLED_CA
-   spool $1-dca.txt
-   select BROKER_ID||'|'||CA_ID||'|'||CREATEDBY||'|'||CREATEDDATE||'|'||MODIFIEDBY||'|'||MODIFIEDDATE||'|'||DELETEFLAG||'|' from DISABLED_CA where ca_id in (select ca_id from corp_act where target_cusip in (select cusip from svi_rad where acct_no='$1') and work_status='READY') and broker_id='$CLIENT_ID';
+   spool $1-$2-vpt.txt
+   # *** protected query *** 
 
-   --STEPUP_TRANSACTIONS
-   spool $1-sut.txt
-   select SU_ID||'|'||IFCE_ID||'|'||IFCE_TABLE||'|'||ACCT_NO||'|'||SEC_NO||'|'||STEPDATE||'|'||STEPUP_PCT||'|'||FMV||'|'||QTY||'|'||COST||'|'||CREATEDBY||'|'||CREATEDDATE||'|'||MODIFIEDBY||'|'||MODIFIEDDATE||'|'||PROCESS_STATUS||'|'||DELETEFLAG||'|'||ORIGINAL_LOT_ID||'|'||ERROR_CODE||'|'||AVDATE||'|' from STEPUP_TRANSACTIONS where acct_no='$1';
-
-   --VP_TRANSACTION
-   spool $1-vpt.txt
-   select ACCT_ID||'|'||SECURITY_ID||'|'||IFCE_SELL_ID||'|'||IFCE_BUY_ID||'|'||INV_QTY||'|'||STATUS||'|'||PROCESS_STATUS||'|'||DELETEFLAG||'|'||CREATEDDATE||'|'||MODIFIEDDATE||'|'||SEQ_NO||'|'||VPTXN_ID||'|'||ORIGINAL_LOT_ID||'|' from VP_TRANSACTION where acct_id='$BO_ID-$FIRM_NO-$SUB_NO-$1';
-
-   --FI_ELECTION
-   spool $1-fie.txt
-   select ELECTION_ID||'|'||ACCT_NO||'|'||SEC_NO||'|'||ELECTION_TYPE||'|'||PAYER_OPTION||'|'||APPLICABLE_LEVEL||'|'||CREATEDDATE||'|'||CREATEDBY||'|'||MODIFIEDDATE||'|'||MODIFIEDBY||'|'||ERROR_CODE||'|'||DELETEFLAG||'|'||PROCESS_STATUS||'|' from FI_ELECTION where acct_no='$1';
-
+   spool $1-$2-fie.txt
+   # *** protected query *** 
 
 quit
 !
