@@ -106,42 +106,31 @@ sqlplus -s $DB_USER/$DB_PASS@$ORACLE_SID<<!
    # *** protected query *** 
    spool off
 
-   --CA_ACCT_SEC
    spool $1-$2-cas.txt
    # *** protected query *** 
    spool off
 
-   --CORP_ACT
    spool $1-$2-cpa.txt
    # *** protected query *** 
 
-   --CORP_ACT_PAYOUT
    spool $1-$2-cap.txt
    # *** protected query *** 
 
-
-   --CORP_ACT_BROKER
    spool $1-$2-cab.txt
    # *** protected query *** 
 
-
-   --CORP_ACT_TERMS
    spool $1-$2-cat.txt
    # *** protected query *** 
 
-   --DISABLED_CA
    spool $1-$2-dca.txt
    # *** protected query *** 
 
-   --STEPUP_TRANSACTIONS
    spool $1-$2-sut.txt
    # *** protected query *** 
 
-   --VP_TRANSACTION
    spool $1-$2-vpt.txt
    # *** protected query *** 
 
-   --FI_ELECTION
    spool $1-$2-fie.txt
    # *** protected query *** 
 
@@ -314,28 +303,28 @@ update_acct(){
       echo "source client_id: "$SRC_CLIENT_ID
    fi
    sqlplus -s $DB_USER/$DB_PASS@$ORACLE_SID<<!
-   update account_master set bo_id='$BO_ID', sub_no='$SUB_NO', firm_no='$FIRM_NO',BROKER_ID='$CLIENT_ID',acct_id='$BO_ID-$FIRM_NO-$SUB_NO-$1' where acct_no='$1';
+   update tabam set bo_id='$BO_ID', sub_no='$SUB_NO', firm_no='$FIRM_NO',BROKER_ID='$CLIENT_ID',acct_id='$BO_ID-$FIRM_NO-$SUB_NO-$1' where acct_no='$1';
 
-   update svi_seed set process_status='UNDEFINED' where acct_no='$1' and process_status='PROCESSED';
-   update svi_seed set bo_id='$BO_ID',sub_no='$SUB_NO',firm_no='$FIRM_NO',client_id='$CLIENT_ID' where acct_no='$1';
+   update tabsd set process_status='UNDEFINED' where acct_no='$1' and process_status='PROCESSED';
+   update tabsd set bo_id='$BO_ID',sub_no='$SUB_NO',firm_no='$FIRM_NO',client_id='$CLIENT_ID' where acct_no='$1';
 
-   update svi_trd set process_status='UNDEFINED' where acct_no='$1' and process_status='PROCESSED';
-   update svi_trd set bo_id='$BO_ID', sub_no='$SUB_NO', firm_no='$FIRM_NO',CLIENT_ID='$CLIENT_ID' where acct_no='$1';
+   update tabtr set process_status='UNDEFINED' where acct_no='$1' and process_status='PROCESSED';
+   update tabtr set bo_id='$BO_ID', sub_no='$SUB_NO', firm_no='$FIRM_NO',CLIENT_ID='$CLIENT_ID' where acct_no='$1';
 
-   update svi_rad set process_status='UNDEFINED' where acct_no='$1' and process_status='PROCESSED';
-   update svi_rad set bo_id='$BO_ID', sub_no='$SUB_NO', firm_no='$FIRM_NO',CLIENT_ID='$CLIENT_ID' where acct_no='$1';
+   update tabrd set process_status='UNDEFINED' where acct_no='$1' and process_status='PROCESSED';
+   update tabrd set bo_id='$BO_ID', sub_no='$SUB_NO', firm_no='$FIRM_NO',CLIENT_ID='$CLIENT_ID' where acct_no='$1';
 
-   update svi_cli set bo_id='$BO_ID', sub_no='$SUB_NO', firm_id='$FIRM_NO',CLIENT_ID='$CLIENT_ID',process_status='UNDEFINED' where acct_no='$1';
+   update tabcl set bo_id='$BO_ID', sub_no='$SUB_NO', firm_id='$FIRM_NO',CLIENT_ID='$CLIENT_ID',process_status='UNDEFINED' where acct_no='$1';
 
-   update fip_hps_master set process_status='UNDEFINED',acct_id='$BO_ID-$FIRM_NO-$SUB_NO-$1',security_id='$BO_ID-'||sec_no where acct_no='$1';
+   update tabfm set process_status='UNDEFINED',acct_id='$BO_ID-$FIRM_NO-$SUB_NO-$1',security_id='$BO_ID-'||sec_no where acct_no='$1';
 
-   update fip_hps_detail set process_status='UNDEFINED',acct_id='$BO_ID-$FIRM_NO-$SUB_NO-$1',security_id='$BO_ID-'||sec_no where acct_no='$1';
+   update tabfd set process_status='UNDEFINED',acct_id='$BO_ID-$FIRM_NO-$SUB_NO-$1',security_id='$BO_ID-'||sec_no where acct_no='$1';
 
-   update ca_acct_sec set account_id='$BO_ID-$FIRM_NO-$SUB_NO-$1',security_id='$BO_ID-'||substr(security_id,3) where account_id='$SRC_ACCT_ID-$1';
-   update ca_acct_sec set process_status='UNDEFINED' where account_id='$BO_ID-$FIRM_NO-$SUB_NO-$1' and process_status='PROCESSED';
+   update tabcas set account_id='$BO_ID-$FIRM_NO-$SUB_NO-$1',security_id='$BO_ID-'||substr(security_id,3) where account_id='$SRC_ACCT_ID-$1';
+   update tabcas set process_status='UNDEFINED' where account_id='$BO_ID-$FIRM_NO-$SUB_NO-$1' and process_status='PROCESSED';
    commit;
 
-   update corp_act_broker set broker_id='$CLIENT_ID',modifieddate=sysdate,modifiedby='ACCT-COPY' where ca_id in (select ca_id from corp_act where target_cusip in (select cusip from svi_rad where acct_no='$1') and work_status='READY') and broker_id='$SRC_CLIENT_ID';
+   update tabcab set broker_id='$CLIENT_ID',modifieddate=sysdate,modifiedby='ACCT-COPY' where ca_id in (select ca_id from corp_act where target_cusip in (select cusip from svi_rad where acct_no='$1') and work_status='READY') and broker_id='$SRC_CLIENT_ID';
    commit;
 !
 }
