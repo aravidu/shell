@@ -1,2 +1,2 @@
 # shell
-let me be in my shell.. 
+let me stepout of my shell.. 
